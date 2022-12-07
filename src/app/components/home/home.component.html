@@ -1,0 +1,22 @@
+<p>home works!</p>
+
+<div class="table-responsive">
+  <table class="table table-primary">
+    <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Status</th>
+        <th scope="col">Invite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let u of getActiveService.data">
+        <tr class="">
+          <td scope="row">{{u.userName}}</td>
+          <td>R1C2</td>
+          <td><button class="btn btn-success">Invite</button></td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

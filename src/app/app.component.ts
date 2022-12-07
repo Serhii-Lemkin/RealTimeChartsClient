@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SignalrService } from './services/signalr.service';
-import { HttpClient } from '@angular/common/http';
-import { ChartConfiguration, ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-root',
@@ -9,33 +6,5 @@ import { ChartConfiguration, ChartType } from 'chart.js';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  chartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    scales: {
-      y: {
-        min: 0,
-      },
-    },
-  };
-  chartLabels: string[] = ['Real time data for the chart'];
-  chartType: ChartType = 'bar';
-  chartLegend: boolean = true;
-
-  constructor(
-    public signalRService: SignalrService,
-    private http: HttpClient
-  ) {}
-
-  ngOnInit() {
-    this.signalRService.startConnection();
-    this.signalRService.addTransferChartDataListener();
-    this.startHttpRequest();
-  }
-
   title = 'RealTimeChartsClient';
-  private startHttpRequest = () => {
-    this.http.get('https://localhost:5001/api/chart').subscribe((res) => {
-      console.log(res);
-    });
-  };
 }

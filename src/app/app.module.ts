@@ -3,10 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ChartsComponent } from './components/charts/charts.component';
+import { routing } from './routing.module';
+import { FormsModule } from '@angular/forms';
+import HomeComponent from './components/home/home.component';
+import { NavComponent } from './nav/nav.component';
+
+
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, NgChartsModule, HttpClientModule],
+  declarations: [AppComponent, RegisterComponent, ChartsComponent, HomeComponent, NavComponent],
+  imports: [
+    BrowserModule,
+    NgChartsModule,
+    HttpClientModule,
+    routing,
+    FormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

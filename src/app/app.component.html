@@ -1,8 +1,8 @@
-<div style="display: block" *ngIf='signalRService.data'>
-  <canvas baseChart
-          [datasets]="signalRService.data"
-          [labels]="chartLabels"
-          [options]="chartOptions"
-          [legend]="chartLegend"
-          ></canvas>
+<app-nav></app-nav>
+
+
+
+<div class="container">
+  
+  <router-outlet></router-outlet>
 </div>
