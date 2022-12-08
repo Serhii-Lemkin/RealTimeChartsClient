@@ -8,18 +8,28 @@ import { ChartsComponent } from './components/charts/charts.component';
 import { routing } from './routing.module';
 import { FormsModule } from '@angular/forms';
 import HomeComponent from './components/home/home.component';
-import { NavComponent } from './nav/nav.component';
-
-
+import { NavComponent } from './components/nav/nav.component';
+import { InviteComponent } from './components/invite/invite.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { SendinviteComponent } from './components/sendinvite/sendinvite.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, ChartsComponent, HomeComponent, NavComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    ChartsComponent,
+    HomeComponent,
+    NavComponent,
+    InviteComponent,
+    ChatComponent,
+    SendinviteComponent
+  ],
   imports: [
     BrowserModule,
     NgChartsModule,
     HttpClientModule,
     routing,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

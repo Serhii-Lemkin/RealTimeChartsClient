@@ -1,0 +1,10 @@
+<ng-container *ngIf="!getInvite.inviteReceived">
+    Noone sent you invites yet
+</ng-container>
+<ng-container *ngIf="getInvite.inviteReceived">
+    <div>
+        <h4>Accept invite from {{getInvite.data}}</h4>
+        <button type="button" (click)="accept(getInvite.data.personalCode)" class="btn btn-success">Accept</button>
+        <button type="button" (click)="dismiss()" class="btn btn-danger">Dismiss</button>
+  </div>
+</ng-container>

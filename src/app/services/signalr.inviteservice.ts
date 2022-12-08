@@ -7,24 +7,27 @@ import { UserModel } from 'src/_interfaces/usermodel';
 @Injectable({
   providedIn: 'root',
 })
-export class SignalrGetOnline {
-  public data: UserModel[] = [];
+export default class InviteService {
+  public data!: UserModel;
+  public inviteReceived = false;
 
   private hubConnection!: signalR.HubConnection;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/users')
+      .withUrl('https://localhost:5001/invitehub')
       .build();
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
+      .then(() => console.log('Connection started invite reciever'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 
-  public addTransferChartDataListener = () => {
-    this.hubConnection.on('transferchartdata', (data) => {
+  public addTransferChartDataListener = (username: string) => {
+    this.hubConnection.on(username, (data) => {
       this.data = data;
       console.log(data);
+      console.log('hi from invite');
+      this.inviteReceived = true;
     });
   };
 }

@@ -14,11 +14,19 @@ export class RegisterComponent {
     private router: Router,
     public registerService: RegisterService,
     private http: HttpClient
-  ) {}
+  ) {
+    let u = sessionStorage.getItem('currentUser');
+    if (u == null) {
+      sessionStorage.clear;
+    }
+    if (this.userName === '') {
+      return;
+    }
+  }
   userName = '';
 
   register() {
-    if (this.userName === '') return;
+    
     this.registerService.startConnection();
     this.registerService.addTransferChartDataListener(this.userName);
     const headers = new HttpHeaders({

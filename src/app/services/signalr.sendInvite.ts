@@ -7,13 +7,13 @@ import { UserModel } from 'src/_interfaces/usermodel';
 @Injectable({
   providedIn: 'root',
 })
-export class SignalrGetOnline {
-  public data: UserModel[] = [];
+export default class SenfInviteService {
+  public data!: UserModel[];
 
   private hubConnection!: signalR.HubConnection;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/users')
+      .withUrl('https://localhost:5001/invitehub')
       .build();
     this.hubConnection
       .start()
@@ -22,9 +22,10 @@ export class SignalrGetOnline {
   };
 
   public addTransferChartDataListener = () => {
-    this.hubConnection.on('transferchartdata', (data) => {
+    this.hubConnection.on('activeUsers', (data) => {
       this.data = data;
       console.log(data);
+      console.log('hi from users');
     });
   };
 }

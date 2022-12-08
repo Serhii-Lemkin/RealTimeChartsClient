@@ -1,21 +1,32 @@
-<p>home works!</p>
+<h1>Hello, {{ user.userName }}!</h1>
+
+<app-invite></app-invite>
 
 <div class="table-responsive">
   <table class="table table-primary">
     <thead>
       <tr>
         <th scope="col">User</th>
-        <th scope="col">Status</th>
+        <th scope="col">Last Active</th>
         <th scope="col">Invite</th>
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let u of getActiveService.data">
-        <tr class="">
-          <td scope="row">{{u.userName}}</td>
-          <td>R1C2</td>
-          <td><button class="btn btn-success">Invite</button></td>
-        </tr>
+      <ng-container *ngIf="getActiveService.data == undefined || getActiveService.data.length <= 1 ">
+        <p>Noone is connected :(</p>
+      </ng-container>
+      <ng-container *ngIf="getActiveService.data != undefined && getActiveService.data.length >= 1">
+        <ng-container *ngFor="let u of getActiveService.data">
+          <ng-container *ngIf="u.userName != user.userName">
+            <tr class="">
+              <td scope="row">{{ u.userName }}</td>
+              <td>{{ u.lastRequest | date : "short" }}</td>
+              <td>
+                <app-sendinvite [currentUser]="user" [invitedUserName]="u.userName"></app-sendinvite>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
       </ng-container>
     </tbody>
   </table>
