@@ -4,20 +4,13 @@ import * as signalR from '@microsoft/signalr';
 import { ChartModel } from 'src/_interfaces/chart.model';
 import { UserModel } from 'src/_interfaces/usermodel';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export default class UpdateUser {
-  public data!: UserModel;
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient){
-
-  }
-
-  
   updateUser = (userName: string) => {
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -29,7 +22,7 @@ export default class UpdateUser {
         headers: headers,
       })
       .subscribe((data) => {
-        console.log("updated " + data);
+        console.log('updated ' + data);
       });
-  }
+  };
 }

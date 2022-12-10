@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import SenfInviteService from 'src/app/services/signalr.sendInvite';
 import InviteModel from 'src/models/inviteModel';
-import ThisUser from 'src/models/thisUser';
 import { UserModel } from 'src/_interfaces/usermodel';
 
 @Component({
@@ -29,14 +28,12 @@ export class SendinviteComponent {
   sendInviteClick = () => {
     
 this.inviteSent = true
-    let tmp = new InviteModel(
-      this.currentUser.personalCode,
-      this.invitedUserName
-    );
+    
     let json = JSON.stringify(this.currentUser.personalCode);
     console.log(json)
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "http://localhost:4200"
     });
     this.http
       .post(
@@ -52,6 +49,6 @@ this.inviteSent = true
   };
   ngOnInit() {
     this.sendInvite.startConnection();
-    this.sendInvite.addTransferChartDataListener();
+    this.sendInvite.addTransferChartDataListener(this.currentUser.personalCode);
   }
 }
