@@ -16,7 +16,7 @@ export class RegisterComponent {
     private http: HttpClient
   ) {
     let u = sessionStorage.getItem('currentUser');
-    if (u == null) {
+    if (!u) {
       sessionStorage.clear;
     }
     if (this.userName === '') {

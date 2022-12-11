@@ -1,11 +1,13 @@
 div.scroll {
-        width: auto;
-        height: 300px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        text-align: center;
-        padding: 20px;
-      }
+  display: flex;
+  flex-direction: column-reverse;
+  width: auto;
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  padding: 20px;
+}
 
 .message-blue {
   position: relative;
@@ -50,4 +52,3 @@ div.scroll {
   bottom: 5px;
   left: 5px;
 }
-
