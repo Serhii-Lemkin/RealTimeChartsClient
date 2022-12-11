@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import SenfInviteService from 'src/app/services/signalr.sendInvite';
-import InviteModel from 'src/models/inviteModel';
 import { UserModel } from 'src/_interfaces/usermodel';
 
 @Component({

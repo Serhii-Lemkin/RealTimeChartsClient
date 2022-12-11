@@ -32,6 +32,7 @@ export default class MessageService {
       console.log('CurrentMessages');
       console.log(this.messages);
       console.log(currentUser);
+      sessionStorage.setItem(code, JSON.stringify(this.messages))
     });
   };
 }

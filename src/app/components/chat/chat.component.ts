@@ -26,6 +26,7 @@ export class ChatComponent implements OnInit {
     if (tmp) this.currentUser = JSON.parse(tmp);
     else this.router.navigate(['/']);
     this.message.from = this.currentUser.userName;
+    
   }
 
   ngOnInit() {
@@ -34,6 +35,15 @@ export class ChatComponent implements OnInit {
       this.code,
       this.currentUser.userName
     );
+    let tmpMessages = sessionStorage.getItem(this.code)
+    if(tmpMessages) this.messanger.messages = JSON.parse(tmpMessages)
+  }
+
+  leave = () => {
+    // new part with confirm and back buttons and message that all the progress will be lost
+    //clear current message history
+    // http req to leave chat, the other chat member gets notification and also may leave chat 
+    //redirects to home
   }
 
   sendMessage() {

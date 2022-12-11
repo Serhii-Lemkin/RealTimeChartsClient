@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { SignalrService } from 'src/app/services/signalr.service';
@@ -24,7 +24,7 @@ export class ChartsComponent {
 
   constructor(
     public signalRService: SignalrService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class ChartsComponent {
 
   title = 'RealTimeChartsClient';
   private startHttpRequest = () => {
-    this.http.get('https://localhost:5001/api/chart').subscribe((res) => {
+    this.http.get(environment.apiURL+'/api/chart').subscribe((res) => {
       console.log(res);
     });
   };
