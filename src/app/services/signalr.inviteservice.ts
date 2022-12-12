@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 import { ChartModel } from 'src/_interfaces/chart.model';
 import { UserModel } from 'src/_interfaces/usermodel';
 
@@ -14,7 +15,7 @@ export default class InviteService {
   private hubConnection!: signalR.HubConnection;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/invitehub')
+      .withUrl(`${environment.apiURL}/invitehub`)
       .build();
     this.hubConnection
       .start()

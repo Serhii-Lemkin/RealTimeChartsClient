@@ -13,7 +13,7 @@ if (typeof Worker !== 'undefined') {
   // Create a new
   const worker = new Worker(new URL('./app.worker', import.meta.url));
   worker.onmessage = ({ data }) => {
-    console.log(`page got message: ${data}`);
+    //console.log(`page got message: ${data}`);
   };
   worker.postMessage('hello');
 } else {

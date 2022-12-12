@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 import { ChartModel } from 'src/_interfaces/chart.model';
 import { UserModel } from 'src/_interfaces/usermodel';
 
@@ -18,7 +19,7 @@ export default class UpdateUser {
     const json = JSON.stringify(userName);
 
     this.http
-      .post('https://localhost:5001/api/user/upd', json, {
+      .post(`${environment.apiURL}/api/user/upd`, json, {
         headers: headers,
       })
       .subscribe((data) => {

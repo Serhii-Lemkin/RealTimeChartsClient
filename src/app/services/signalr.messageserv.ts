@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 import { ChartModel } from 'src/_interfaces/chart.model';
 import { MessageModel } from 'src/_interfaces/message.model';
 import { MessageInt } from 'src/_interfaces/messageInt';
@@ -16,7 +17,7 @@ export default class MessageService {
   public startConnection = () => {
     this.showGame = false
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/messagehub')
+      .withUrl(`${environment.apiURL}/messagehub`)
       .build();
     this.hubConnection
       .start()
@@ -28,7 +29,6 @@ export default class MessageService {
   }
 
   public addTransferDataListener = (code: string, currentUser:string) => {
-    console.log(code);
     this.hubConnection.on(code, (data) => {
       if(data as string === "start"){
           this.showGame = true
