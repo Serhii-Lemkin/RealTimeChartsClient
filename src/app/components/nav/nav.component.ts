@@ -10,7 +10,7 @@ import { UserModel } from 'src/_interfaces/usermodel';
 })
 export class NavComponent {
   constructor(private router: Router, private http: HttpClient) {}
-  
+
   user!: UserModel;
 
   logout = () => {
@@ -30,7 +30,7 @@ export class NavComponent {
       })
       .subscribe((data) => {
         console.log(data);
-        sessionStorage.removeItem('currentUser');
+        sessionStorage.clear();
         this.router.navigate(['/']);
       });
   };

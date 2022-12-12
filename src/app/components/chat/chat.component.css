@@ -1,8 +1,13 @@
+div.page {
+height: 100%
+}
+
 div.scroll {
+  
   display: flex;
   flex-direction: column-reverse;
   width: auto;
-  height: 400px;
+  height: 70vh;
   overflow-x: hidden;
   overflow-y: auto;
   text-align: center;
@@ -21,6 +26,7 @@ div.scroll {
   font: 400 0.9em "Open Sans", sans-serif;
   border: 1px solid #97c6e3;
   border-radius: 10px;
+  overflow-wrap: break-word;
 }
 
 .message-orange {
@@ -35,6 +41,7 @@ div.scroll {
   font: 400 0.9em "Open Sans", sans-serif;
   border: 1px solid #dfd087;
   border-radius: 10px;
+  overflow-wrap: break-word;
 }
 
 .message-timestamp-right {
@@ -52,3 +59,12 @@ div.scroll {
   bottom: 5px;
   left: 5px;
 }
+
+.message_write{
+  display: inline;
+}
+.btn {
+  height:max-content;
+}
+
+

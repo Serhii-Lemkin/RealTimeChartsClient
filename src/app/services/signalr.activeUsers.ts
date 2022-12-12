@@ -17,15 +17,12 @@ export default class ActiveUsers {
       .build();
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 
   public addTransferChartDataListener = () => {
     this.hubConnection.on('activeUsers', (data) => {
       this.data = data;
-      console.log(data);
-      console.log('hi from users');
     });
   };
 }

@@ -15,10 +15,9 @@ export class SendinviteComponent {
   @Input() invitedUserName!: string;
   //me
   @Input() currentUser!: UserModel;
-  inviteSent = false
   constructor(
     private router: Router,
-    private sendInvite: SenfInviteService,
+    public sendInvite: SenfInviteService,
     private http: HttpClient
   ) {
     console.log('UserFromList');
@@ -26,7 +25,7 @@ export class SendinviteComponent {
   }
   sendInviteClick = () => {
     
-this.inviteSent = true
+this.sendInvite.inviteSent = true
     
     let json = JSON.stringify(this.currentUser.personalCode);
     console.log(json)

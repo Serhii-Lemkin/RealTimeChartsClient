@@ -10,16 +10,15 @@ import { MessageInt } from 'src/_interfaces/messageInt';
 export default class MessageService {
   messages: MessageModel[] = [];
   newMessage!: MessageModel;
-  showGame! : boolean;
   private hubConnection!: signalR.HubConnection;
 
   public startConnection = () => {
-    this.showGame = false
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('https://localhost:5001/messagehub')
       .build();
     this.hubConnection
       .start()
+      .then(() => console.log('Connection To Message started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
   public stopConnection=()=>{
@@ -27,16 +26,10 @@ export default class MessageService {
     this.messages = [];
   }
 
-  public addTransferDataListener = (code: string, currentUser:string) => {
+  public addTransferDataListener = (code: string) => {
     console.log(code);
     this.hubConnection.on(code, (data) => {
-      if(data as string === "start"){
-          this.showGame = true
-          return
-      }
-      this.newMessage = data as MessageModel;
-      this.messages.unshift(this.newMessage)
-      sessionStorage.setItem(code, JSON.stringify(this.messages))
+      
     });
   };
 }

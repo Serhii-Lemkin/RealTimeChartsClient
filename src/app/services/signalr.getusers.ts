@@ -17,14 +17,12 @@ export class SignalrGetOnline {
       .build();
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 
   public addTransferChartDataListener = () => {
     this.hubConnection.on('transferchartdata', (data) => {
       this.data = data;
-      console.log(data);
     });
   };
 }

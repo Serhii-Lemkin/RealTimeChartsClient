@@ -4,15 +4,14 @@ import * as signalR from '@microsoft/signalr';
 import { ChartModel } from 'src/_interfaces/chart.model';
 import { UserModel } from 'src/_interfaces/usermodel';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export default class SenfInviteService {
-  constructor(private router: Router){
-
-  }
+  constructor(private router: Router) {}
   public data!: UserModel[];
+
+  inviteSent: boolean = false;
 
   private hubConnection!: signalR.HubConnection;
   public startConnection = () => {
@@ -28,9 +27,13 @@ export default class SenfInviteService {
   public addTransferChartDataListener = (personalCode: string) => {
     this.hubConnection.on(personalCode, (data) => {
       this.data = data;
-      console.log(data +' received');
-      if(data == "accept"){
+      console.log(data + ' received');
+      if (data == 'accept') {
+        this.inviteSent = false;
         this.router.navigate(['chat/' + personalCode]);
+      }
+      if (data == 'dismiss') {
+        this.inviteSent = false;
       }
     });
   };

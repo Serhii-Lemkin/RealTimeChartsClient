@@ -12,6 +12,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { InviteComponent } from './components/invite/invite.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { SendinviteComponent } from './components/sendinvite/sendinvite.component';
+import { GameComponent } from './components/game/game.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SendinviteComponent } from './components/sendinvite/sendinvite.componen
     NavComponent,
     InviteComponent,
     ChatComponent,
-    SendinviteComponent
+    SendinviteComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

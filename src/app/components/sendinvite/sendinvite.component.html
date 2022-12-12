@@ -1,8 +1,7 @@
-<ng-container *ngIf="!inviteSent">
+<ng-container *ngIf="!sendInvite.inviteSent">
 
     <button class="btn btn-success" (click)="sendInviteClick()">Invite {{invitedUserName}}</button>
 </ng-container>    
-    <ng-container *ngIf="inviteSent">
+    <ng-container *ngIf="sendInvite.inviteSent">
         Invite Sent
-        load
     </ng-container>

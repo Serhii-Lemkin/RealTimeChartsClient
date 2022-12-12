@@ -18,15 +18,12 @@ export default class InviteService {
       .build();
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started invite reciever'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 
   public addTransferChartDataListener = (username: string) => {
     this.hubConnection.on(username, (data) => {
       this.data = data;
-      console.log(data);
-      console.log('hi from invite');
       this.inviteReceived = true;
     });
   };

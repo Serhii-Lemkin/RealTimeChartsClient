@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RegisterService } from 'src/app/services/signalr.register';
 import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +11,6 @@ import { NgModule } from '@angular/core';
 export class RegisterComponent {
   constructor(
     private router: Router,
-    public registerService: RegisterService,
     private http: HttpClient
   ) {
     let u = sessionStorage.getItem('currentUser');
@@ -26,9 +24,6 @@ export class RegisterComponent {
   userName = '';
 
   register() {
-    
-    this.registerService.startConnection();
-    this.registerService.addTransferChartDataListener(this.userName);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -40,6 +35,7 @@ export class RegisterComponent {
       })
       .subscribe((data) => {
         console.log(data);
+        sessionStorage.setItem('currentUser', JSON.stringify(data));
         this.router.navigate(['/home']);
       });
   }

@@ -35,8 +35,10 @@ export class ChartsComponent {
 
   title = 'RealTimeChartsClient';
   private startHttpRequest = () => {
-    this.http.get(environment.apiURL+'/api/chart').subscribe((res) => {
-      console.log(res);
-    });
+    this.http
+      .get('http://localhost:5001/api/chart')
+      .subscribe((res) => {
+        console.log(res);
+      });
   };
 }
