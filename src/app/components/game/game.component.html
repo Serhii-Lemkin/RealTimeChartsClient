@@ -1,5 +1,5 @@
-<h1>TicTacToe! {{ gameLogic.counter }}</h1>
-<h5>You are {{ gameLogic.role }}</h5>
+<h1>TicTacToe!</h1>
+<h5>You are {{ gameService.gamelogic.role }}</h5>
 
 <div class="gamelayout">
   <div class="layout-buttons">
@@ -61,14 +61,14 @@
     ></button>
   </div>
 </div>
-<h5>Next {{ gameLogic.winner }}</h5>
+<h5>Next {{ gameService.gamelogic.currentRole }}</h5>
 
-<ng-container *ngIf="gameLogic.gameEnded">
-  <ng-container *ngIf="gameLogic.counter == 9 && gameLogic.winner === ''"
+<ng-container *ngIf="gameService.gamelogic.gameEnded">
+  <ng-container *ngIf="gameService.gamelogic.counter == 9 && gameService.gamelogic.winner === ''"
     ><h3>No winners :(</h3></ng-container
   >
-  <ng-container *ngIf="gameLogic.winner !== ''">
-    <h3>{{ gameLogic.winner }} Won!</h3>
+  <ng-container *ngIf="gameService.gamelogic.winner !== ''">
+    <h3>{{ gameService.gamelogic.winner }} Won!</h3>
   </ng-container>
   <button type="button" (click)="start()" class="btn btn-primary">
     Restart!

@@ -23,6 +23,7 @@ export default class GameLogic {
     this.rebuildHistory();
   }
   start = () => {
+    this.switchRoles();
     this.clearButtons();
     this.clearHistory();
     this.counter = 0;
@@ -32,11 +33,15 @@ export default class GameLogic {
   };
 
   nextMove = (m: GameMove) => {
+    console.log(m.cellId);
     var btn = document.getElementById(`${m.cellId}`)!;
+    console.log(m);
     if (btn.innerHTML != '') {
       return;
     }
+    console.log('goodspot');
     btn.innerHTML = this.currentRole;
+    console.log(this.currentRole);
     this.changeRole();
     this.counter++;
     this.history.push(m);
@@ -51,6 +56,13 @@ export default class GameLogic {
       this.currentRole = 'O';
     } else {
       this.currentRole = 'X';
+    }
+  }
+  switchRoles() {
+    if (this.role == 'X') {
+      this.role = 'O';
+    } else {
+      this.role = 'X';
     }
   }
 
@@ -73,8 +85,6 @@ export default class GameLogic {
     });
   }
   checkWin() {
-    if (this.counter === 9) this.gameEnded = true;
-    if (this.gameEnded) return;
     let b11 = document.getElementById(`${11}`)!;
     let b12 = document.getElementById(`${12}`)!;
     let b13 = document.getElementById(`${13}`)!;
@@ -114,6 +124,11 @@ export default class GameLogic {
       this.changeRole();
       this.winner = this.currentRole;
       this.gameEnded = true;
+      this.switchRoles();
+    }
+    if (this.counter === 9) this.gameEnded = true;
+    if (this.gameEnded) {
+      return;
     }
   }
 }
