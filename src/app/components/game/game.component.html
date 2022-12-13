@@ -1,20 +1,71 @@
 <h1>TicTacToe!</h1>
+<h5>You are {{ gameLogic.role }}</h5>
 
 <div class="gamelayout">
   <div class="layout-buttons">
-    <button (click)="buttonClick(11)" class="game" type="button"></button>
-    <button (click)="buttonClick(12)" class="game" type="button"></button>
-    <button (click)="buttonClick(13)" class="game" type="button"></button>
+    <button
+      (click)="buttonClick(11)"
+      id="11"
+      class="game"
+      type="button"
+    ></button>
+    <button
+      (click)="buttonClick(12)"
+      id="12"
+      class="game"
+      type="button"
+    ></button>
+    <button
+      (click)="buttonClick(13)"
+      id="13"
+      class="game"
+      type="button"
+    ></button>
 
-    <button (click)="buttonClick(21)" class="game" type="button"></button>
-    <button (click)="buttonClick(22)" class="game" type="button"></button>
-    <button (click)="buttonClick(23)" class="game" type="button"></button>
+    <button
+      (click)="buttonClick(21)"
+      id="21"
+      class="game"
+      type="button"
+    ></button>
+    <button
+      (click)="buttonClick(22)"
+      id="22"
+      class="game"
+      type="button"
+    ></button>
+    <button
+      (click)="buttonClick(23)"
+      id="23"
+      class="game"
+      type="button"
+    ></button>
 
-    <button (click)="buttonClick(31)" class="game" type="button"></button>
-    <button (click)="buttonClick(32)" class="game" type="button"></button>
-    <button (click)="buttonClick(33)" class="game" type="button"></button>
+    <button
+      (click)="buttonClick(31)"
+      id="31"
+      class="game"
+      type="button"
+    ></button>
+    <button
+      (click)="buttonClick(32)"
+      id="32"
+      class="game"
+      type="button"
+    ></button>
+    <button
+      (click)="buttonClick(33)"
+      id="33"
+      class="game"
+      type="button"
+    ></button>
   </div>
 </div>
+<h5>Next {{ gameLogic.currentRole }}</h5>
 
-<button type="button" class="btn btn-primary">Start!</button>
-<button type="button" class="btn btn-primary">Restart!</button>
+<ng-container *ngIf="gameLogic.gameEnded">
+  <h3>{{ gameLogic.currentRole }} Won!</h3>
+  <button type="button" (click)="start()" class="btn btn-primary">
+    Restart!
+  </button>
+</ng-container>

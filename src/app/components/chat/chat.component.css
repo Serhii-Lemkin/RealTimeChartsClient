@@ -68,3 +68,8 @@ div.scroll {
 }
 
 
+.hidden {
+  visibility: hidden;
+  height:1px;
+}
+

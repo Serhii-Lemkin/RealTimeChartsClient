@@ -23,8 +23,6 @@ export default class HomeComponent implements OnInit {
     let tmpUser = sessionStorage.getItem('currentUser');
     if (tmpUser?.valueOf === null) this.router.navigate(['/']);
     if (tmpUser != null) this.user = JSON.parse(tmpUser);
-
-    
   }
   private startHttpRequest = () => {
     this.http.get(`${environment.apiURL}/api/user`).subscribe((data) => {

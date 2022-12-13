@@ -1,7 +1,7 @@
-<div class="modal-body row page">
-  <div [ngClass]="messanger.showGame ? 'col-md-6' : ''">
+<div [ngClass]="messanger.showGame ? 'modal-body row page' : ''" >
+  <div [ngClass]="messanger.showGame ? 'col-md-6' : 'hidden'">
+    <app-game [roomCode]="code"></app-game>
     <ng-container *ngIf="messanger.showGame">
-      <app-game></app-game>
     </ng-container>
   </div>
   <div [ngClass]="messanger.showGame ? 'col-md-6' : ''">

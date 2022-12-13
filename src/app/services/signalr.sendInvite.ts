@@ -21,6 +21,7 @@ export default class SenfInviteService {
       .build();
     this.hubConnection
       .start()
+      .then(() => console.log('Connection started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 

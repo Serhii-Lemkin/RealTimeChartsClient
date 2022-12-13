@@ -19,7 +19,7 @@ export class SendinviteComponent {
     private router: Router,
     public sendInvite: SenfInviteService,
     private http: HttpClient
-  ) {  }
+  ) {this.sendInvite.inviteSent = false;}
   sendInviteClick = () => {
     this.sendInvite.inviteSent = true;
     let json = JSON.stringify(this.currentUser.personalCode);
@@ -27,10 +27,10 @@ export class SendinviteComponent {
       'Content-Type': 'application/json',
     });
     this.http
-      .post(`${environment.apiURL}/api/invite/` + this.invitedUserName, json, {
+      .post(`${environment.apiURL}/api/invite/${this.invitedUserName}`, json, {
         headers: headers,
       })
-      .subscribe((data) => {      });
+      .subscribe((data) => {});
   };
   ngOnInit() {
     this.sendInvite.startConnection();

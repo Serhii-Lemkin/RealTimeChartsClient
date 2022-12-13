@@ -32,6 +32,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.messanger.messages = [];
     this.messanger.startConnection();
     this.messanger.addTransferDataListener(
       this.code,
@@ -41,18 +42,18 @@ export class ChatComponent implements OnInit {
     if (tmpMessages) this.messanger.messages = JSON.parse(tmpMessages);
   }
 
-  hideGame=()=>{
-    this.messanger.showGame = false
-  }
+  hideGame = () => {
+    this.messanger.showGame = false;
+  };
 
-  startGame=()=>{
-    if(this.messanger.showGame) return
+  startGame = () => {
+    if (this.messanger.showGame) return;
     //this.messanger.showGame = true;
-    let init = new InitGame(this.code, "start")
+    let init = new InitGame(this.code, 'start');
     this.http
       .post(`${environment.apiURL}/api/message/ttt`, init)
       .subscribe((data) => console.log(data));
-  }
+  };
 
   leave = () => {
     this.leaveChatClicked = true;
