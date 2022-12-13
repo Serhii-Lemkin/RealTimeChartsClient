@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/_interfaces/usermodel';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-nav',
@@ -25,11 +26,10 @@ export class NavComponent {
       'Content-Type': 'application/json',
     });
     this.http
-      .post('https://localhost:5001/api/user/logout', json, {
+      .post(`${environment.apiURL}/api/user/logout`, json, {
         headers: headers,
       })
       .subscribe((data) => {
-        console.log(data);
         sessionStorage.clear();
         this.router.navigate(['/']);
       });

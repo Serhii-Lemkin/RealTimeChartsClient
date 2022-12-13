@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -30,11 +31,10 @@ export class RegisterComponent {
 
     const json = JSON.stringify(this.userName);
     this.http
-      .post('https://localhost:5001/api/user/reg', json, {
+      .post(`${environment.apiURL}/api/user/reg`, json, {
         headers: headers,
       })
       .subscribe((data) => {
-        console.log(data);
         sessionStorage.setItem('currentUser', JSON.stringify(data));
         this.router.navigate(['/home']);
       });

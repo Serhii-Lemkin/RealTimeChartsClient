@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { UserModel } from 'src/_interfaces/usermodel';
 import InviteService from '../../services/signalr.inviteservice';
 
@@ -31,17 +32,18 @@ export class InviteComponent {
   accept = (code: string) => {
     this.getInvite.inviteReceived = false;
     let json = JSON.stringify("accept");
-    console.log(json);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
     });
     this.http
-      .post('https://localhost:5001/api/invite/react/' + this.getInvite.data, json, {
-        headers: headers,
-      })
+      .post(
+        `${environment.apiURL}/api/invite/react/` + this.getInvite.data,
+        json,
+        {
+          headers: headers,
+        }
+      )
       .subscribe((data) => {
-        console.log('return from server ' + data);
         this.inviteCode = data as UserModel;
         this.router.navigate(['chat/' + this.inviteCode.personalCode]);
       });

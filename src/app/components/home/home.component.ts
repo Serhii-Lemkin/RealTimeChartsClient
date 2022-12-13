@@ -3,6 +3,7 @@ import { UserModel } from 'src/_interfaces/usermodel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import ActiveUsers from 'src/app/services/signalr.activeUsers';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -26,9 +27,8 @@ export default class HomeComponent implements OnInit {
     
   }
   private startHttpRequest = () => {
-    this.http.get('https://localhost:5001/api/user').subscribe((data) => {
+    this.http.get(`${environment.apiURL}/api/user`).subscribe((data) => {
       this.getActiveService.data = data as UserModel[];
-      console.log(this.getActiveService.data);
     });
   };
   ngOnInit() {

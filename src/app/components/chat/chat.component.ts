@@ -49,9 +49,8 @@ export class ChatComponent implements OnInit {
     if(this.messanger.showGame) return
     //this.messanger.showGame = true;
     let init = new InitGame(this.code, "start")
-    console.log(init)
     this.http
-      .post('https://localhost:5001/api/message/ttt', init)
+      .post(`${environment.apiURL}/api/message/ttt`, init)
       .subscribe((data) => console.log(data));
   }
 
@@ -77,8 +76,8 @@ export class ChatComponent implements OnInit {
     this.message.code = this.code;
     this.message.date = new Date();
     this.http
-      .post('https://localhost:5001/api/message', this.message)
-      .subscribe((data) => console.log(data));
+      .post(`${environment.apiURL}/api/message`, this.message)
+      .subscribe((data) => {});
     this.message = new MessageModel(
       '',
       this.currentUser.userName,
