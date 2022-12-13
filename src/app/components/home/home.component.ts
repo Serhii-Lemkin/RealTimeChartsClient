@@ -21,12 +21,16 @@ export default class HomeComponent implements OnInit {
     public getActiveService: ActiveUsers
   ) {
     let tmpUser = sessionStorage.getItem('currentUser');
-    if (tmpUser?.valueOf === null) this.router.navigate(['/']);
+    if (!tmpUser) this.router.navigate(['/']);
     if (tmpUser != null) this.user = JSON.parse(tmpUser);
   }
   private startHttpRequest = () => {
     this.http.get(`${environment.apiURL}/api/user`).subscribe((data) => {
-      this.getActiveService.data = data as UserModel[];
+      if (data === 'UserName Taken') {
+        console.log(data);
+      } else {
+        this.getActiveService.data = data as UserModel[];
+      }
     });
   };
   ngOnInit() {
