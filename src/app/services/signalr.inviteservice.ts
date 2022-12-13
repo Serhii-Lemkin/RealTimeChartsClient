@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import { environment } from 'src/environments/environment';
+import { ChartModel } from 'src/_interfaces/chart.model';
 import { UserModel } from 'src/_interfaces/usermodel';
 
 import { Output, EventEmitter } from '@angular/core';

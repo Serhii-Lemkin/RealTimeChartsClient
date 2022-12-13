@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
+<<<<<<< HEAD
+=======
+import { ChartModel } from 'src/_interfaces/chart.model';
+>>>>>>> 5e1b6faddb13baae7d3ca4d1f577c887c1e27f20
 import { MessageModel } from 'src/_interfaces/message.model';
 
 @Injectable({

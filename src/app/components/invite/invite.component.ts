@@ -1,9 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { timeout } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
-
 import { environment } from 'src/environments/environment';
 import { UserModel } from 'src/_interfaces/usermodel';
 import InviteService from '../../services/signalr.inviteservice';
@@ -35,7 +32,8 @@ export class InviteComponent {
 
   accept = (code: string) => {
     this.getInvite.inviteReceived = false;
-    let json = JSON.stringify('accept');
+    let json = JSON.stringify("accept");
+    console.log(json);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
