@@ -11,6 +11,7 @@ export default class GameLogic {
   counter: number = 0;
   currentRole: string = 'X';
   gameEnded: boolean = false;
+  winner: string = '';
   constructor(code: string, currentUserCode: string) {
     this.code = code;
 
@@ -27,10 +28,10 @@ export default class GameLogic {
     this.counter = 0;
     this.currentRole = 'X';
     this.gameEnded = false;
+    this.winner = '';
   };
 
   nextMove = (m: GameMove) => {
-    if (this.gameEnded) return;
     var btn = document.getElementById(`${m.cellId}`)!;
     if (btn.innerHTML != '') {
       return;
@@ -72,6 +73,8 @@ export default class GameLogic {
     });
   }
   checkWin() {
+    if (this.counter === 9) this.gameEnded = true;
+    if (this.gameEnded) return;
     let b11 = document.getElementById(`${11}`)!;
     let b12 = document.getElementById(`${12}`)!;
     let b13 = document.getElementById(`${13}`)!;
@@ -81,6 +84,7 @@ export default class GameLogic {
     let b31 = document.getElementById(`${31}`)!;
     let b32 = document.getElementById(`${32}`)!;
     let b33 = document.getElementById(`${33}`)!;
+
     if (
       (b11.innerHTML === b12.innerHTML &&
         b12.innerHTML === b13.innerHTML &&
@@ -108,7 +112,7 @@ export default class GameLogic {
         b31.innerHTML != '')
     ) {
       this.changeRole();
-
+      this.winner = this.currentRole;
       this.gameEnded = true;
     }
   }
