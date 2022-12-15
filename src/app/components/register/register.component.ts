@@ -25,6 +25,7 @@ export class RegisterComponent {
   userName = '';
 
   register() {
+    if(this.userName === "") return;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
