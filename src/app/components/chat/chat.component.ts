@@ -62,8 +62,9 @@ export class ChatComponent implements OnInit {
     sessionStorage.removeItem(this.code);
     sessionStorage.removeItem('gameHistory');
     this.leaveChatClicked = false;
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
     this.messanger.stopConnection();
+
     // http req to leave chat, the other chat member gets notification and also may leave chat
   };
   abortLeave = () => {

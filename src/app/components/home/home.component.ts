@@ -21,8 +21,8 @@ export default class HomeComponent implements OnInit {
     public getActiveService: ActiveUsers
   ) {
     let tmpUser = sessionStorage.getItem('currentUser');
-    if (!tmpUser) this.router.navigate(['/']);
-    if (tmpUser != null) this.user = JSON.parse(tmpUser);
+    if (!tmpUser) this.router.navigate(['/login']);
+    if (tmpUser) this.user = JSON.parse(tmpUser);
   }
   private startHttpRequest = () => {
     this.http.get(`${environment.apiURL}/api/user`).subscribe((data) => {
@@ -34,6 +34,10 @@ export default class HomeComponent implements OnInit {
     });
   };
   ngOnInit() {
+    if (!this.user) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.getActiveService.startConnection();
     this.getActiveService.addTransferChartDataListener();
     this.startHttpRequest();

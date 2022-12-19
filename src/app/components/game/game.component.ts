@@ -48,6 +48,9 @@ export class GameComponent implements OnInit {
     ) {
       return;
     }
+    if (document.getElementById(`${id}`)?.innerHTML != '') {
+      return;
+    }
     this.http
       .post(
         `${environment.apiURL}/api/tictactoe`,

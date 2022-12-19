@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
-<<<<<<< HEAD
-=======
 import { ChartModel } from 'src/_interfaces/chart.model';
->>>>>>> 5e1b6faddb13baae7d3ca4d1f577c887c1e27f20
 import { MessageModel } from 'src/_interfaces/message.model';
 
 @Injectable({
@@ -17,22 +14,24 @@ export default class MessageService {
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${environment.apiURL}/messagehub`)
+      .withUrl(`${environment.apiURL}/messagehub`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .withAutomaticReconnect()
       .build();
     this.hubConnection
       .start()
       .then(() => console.log('Connection To Message started'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
-  public stopConnection=()=>{
+  public stopConnection = () => {
     this.hubConnection.stop();
     this.messages = [];
-  }
+  };
 
   public addTransferDataListener = (code: string) => {
     console.log(code);
-    this.hubConnection.on(code, (data) => {
-      
-    });
+    this.hubConnection.on(code, (data) => {});
   };
 }

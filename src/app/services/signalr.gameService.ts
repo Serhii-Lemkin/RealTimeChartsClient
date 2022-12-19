@@ -11,7 +11,7 @@ import GameLogic from './gameLogic';
 })
 export default class GameService {
   constructor() {
-   // 
+    //
   }
   public data!: UserModel[];
   public gamelogic!: GameLogic;
@@ -19,10 +19,15 @@ export default class GameService {
   private hubConnection!: signalR.HubConnection;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${environment.apiURL}/ticktacktoehub`)
+      .withUrl(`${environment.apiURL}/ticktacktoehub`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .withAutomaticReconnect()
       .build();
     this.hubConnection
       .start()
+      .then(() => console.log('Game started!'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 
@@ -34,8 +39,9 @@ export default class GameService {
     this.hubConnection.on(code, (data) => {
       console.log(data);
       if (data === 'restart') {
-        console.log('restart');
+        console.log('restart initiated');
         this.gamelogic.start();
+        return;
       }
       console.log('data is move');
       this.gamelogic.nextMove(data as GameMove);

@@ -3,4 +3,6 @@ export interface UserModel {
   userName: string;
   lastRequest: Date;
   personalCode: string;
+  passwordHash: string;
+  passwordSalt:string;
 }

@@ -19,8 +19,10 @@ export class SendinviteComponent {
     private router: Router,
     public sendInvite: SenfInviteService,
     private http: HttpClient
-  ) {  }
+  ) {}
   sendInviteClick = () => {
+    this.sendInvite.startConnection();
+    this.sendInvite.addTransferChartDataListener(this.currentUser.personalCode);
     this.sendInvite.inviteSent = true;
     let json = JSON.stringify(this.currentUser.personalCode);
     const headers = new HttpHeaders({
@@ -30,10 +32,7 @@ export class SendinviteComponent {
       .post(`${environment.apiURL}/api/invite/` + this.invitedUserName, json, {
         headers: headers,
       })
-      .subscribe((data) => {      });
+      .subscribe((data) => {});
   };
-  ngOnInit() {
-    this.sendInvite.startConnection();
-    this.sendInvite.addTransferChartDataListener(this.currentUser.personalCode);
-  }
+  ngOnInit() {}
 }

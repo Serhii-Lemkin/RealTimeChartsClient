@@ -1,10 +1,45 @@
-
-
-
-<div class="mb-3">
-  <label for="" class="form-label">UserName</label>
-  <input [(ngModel)]="userName" type="text" class="form-control" name="" id="" aria-describedby="" placeholder="">
-  <button type="Create" class="btn btn-primary" (click)="register()" >Register</button>
+<div class="">
+  <h1>Register New User</h1>
+  <br />
+  <div class="mb-3">
+    <label for="" class="form-label">UserName</label>
+    <input [(ngModel)]="regData.userName" type="text" class="form-control" />
+    <div class="mb-3">
+      <label for="" class="form-label">Password</label>
+      <input
+        [(ngModel)]="regData.password"
+        type="password"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Confirm Password</label>
+      <input
+        [(ngModel)]="confirmPassword"
+        type="password"
+        class="form-control"
+        name=""
+        id=""
+        placeholder=""
+      />
+    </div>
+    <div *ngIf="confirmPassword !== regData.password">
+      <small style="color: red">Passwords Do Not Match</small>
+    </div>
+    <div *ngIf="regData.password.length < 8">
+      <small style="color: red"
+        >Password Should be at least 8 characters long</small
+      >
+    </div>
+    <div *ngIf="userNameTaken">
+      <small style="color: red">UserName Taken</small>
+    </div>
+    <button type="Create" class="btn btn-primary" (click)="register()">
+      Register
+    </button>
+  </div>
+  <h6>
+    Already have an Account? Log in
+    <a href="login"> Here </a>
+  </h6>
 </div>
-
-

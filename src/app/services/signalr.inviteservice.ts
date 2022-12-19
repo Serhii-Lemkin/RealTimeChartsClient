@@ -15,10 +15,15 @@ export default class InviteService {
   private hubConnection!: signalR.HubConnection;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${environment.apiURL}/invitehub`)
+      .withUrl(`${environment.apiURL}/invitehub`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .withAutomaticReconnect()
       .build();
     this.hubConnection
       .start()
+      .then(() => console.log('invite started!'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 

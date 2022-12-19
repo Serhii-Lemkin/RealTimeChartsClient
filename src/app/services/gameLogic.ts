@@ -39,7 +39,6 @@ export default class GameLogic {
     if (btn.innerHTML != '') {
       return;
     }
-    console.log('goodspot');
     btn.innerHTML = this.currentRole;
     console.log(this.currentRole);
     this.changeRole();

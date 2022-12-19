@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import { ChartModel } from 'src/_interfaces/chart.model';
 import { UserModel } from 'src/_interfaces/usermodel';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -13,11 +12,14 @@ export default class ActiveUsers {
 
   private hubConnection!: signalR.HubConnection;
   public startConnection = () => {
+    Object.defineProperty(WebSocket, 'OPEN', { value: 1 });
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${environment.apiURL}/chart`)
+      .withAutomaticReconnect()
       .build();
     this.hubConnection
       .start()
+      .then(() => console.log('active users started!'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 

@@ -17,7 +17,7 @@ export class NavComponent {
   logout = () => {
     let tmpUser = sessionStorage.getItem('currentUser');
     if (tmpUser == null) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/register']);
       return;
     }
     if (tmpUser != null) this.user = JSON.parse(tmpUser);
@@ -31,7 +31,12 @@ export class NavComponent {
       })
       .subscribe((data) => {
         sessionStorage.clear();
-        this.router.navigate(['/']);
+        this.router.navigate(['/register']);
       });
   };
+
+  login() {
+    this.router.navigate(['/login']);
+  }
+ 
 }

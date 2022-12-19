@@ -17,10 +17,15 @@ export default class SenfInviteService {
   private hubConnection!: signalR.HubConnection;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${environment.apiURL}/invitehub`)
+      .withUrl(`${environment.apiURL}/invitehub`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .withAutomaticReconnect()
       .build();
     this.hubConnection
       .start()
+      .then(() => console.log('sendinvite started!'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 
@@ -29,10 +34,12 @@ export default class SenfInviteService {
       this.data = data;
       if (data == 'accept') {
         this.inviteSent = false;
+        this.hubConnection.stop;
         this.router.navigate(['chat/' + personalCode]);
       }
       if (data == 'dismiss') {
         this.inviteSent = false;
+        this.hubConnection.stop;
       }
     });
   };

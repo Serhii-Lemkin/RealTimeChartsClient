@@ -17,14 +17,19 @@ export default class MessageService {
   public startConnection = () => {
     this.showGame = false
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${environment.apiURL}/messagehub`)
+      .withUrl(`${environment.apiURL}/messagehub`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .withAutomaticReconnect()
       .build();
     this.hubConnection
       .start()
+      .then(() => console.log('message started!'))
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
   public stopConnection=()=>{
-    this.hubConnection.stop();
+    this.hubConnection.stop().then(() => console.log('message Stopped'));
     this.messages = [];
   }
 
