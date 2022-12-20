@@ -1,9 +1,17 @@
-<h1>Hello, {{ user.userName }}!</h1>
+<div class="home"> 
 
-<app-invite></app-invite>
+  <h1>Hello, {{ user.userName }}!</h1>
+  
+  <app-invite></app-invite>
+  
+  <ng-container *ngIf="timeDiff(user.lastRequest) > 300"
+    ><h3 style="color: red">
+      You session expired. Refresh the page.
+    </h3></ng-container
+>
 
-<div class="table-responsive">
-  <table class="table table-primary">
+<div class="table-responsive ">
+  <table class="table table-dark">
     <thead>
       <tr>
         <th scope="col">User</th>
@@ -12,22 +20,39 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="getActiveService.data == undefined || getActiveService.data.length <= 1 ">
-        <p>Noone is connected :(</p>
-      </ng-container>
-      <ng-container *ngIf="getActiveService.data != undefined && getActiveService.data.length >= 1">
-        <ng-container *ngFor="let u of getActiveService.data">
-          <ng-container *ngIf="u.userName != user.userName">
-            <tr class="">
-              <td scope="row">{{ u.userName }}</td>
-              <td>{{ u.lastRequest | date : "short" }}</td>
-              <td>
-                <app-sendinvite [currentUser]="user" [invitedUserName]="u.userName"></app-sendinvite>
-              </td>
-            </tr>
+      <ng-container
+      *ngIf="
+      getActiveService.data == undefined ||
+      getActiveService.data.length <= 1
+      "
+      >
+      <p>Noone is connected :(</p>
+    </ng-container>
+    <ng-container
+    *ngIf="
+    getActiveService.data != undefined &&
+    getActiveService.data.length >= 1
+    "
+    >
+    <ng-container *ngFor="let u of getActiveService.data">
+      <ng-container *ngIf="u.userName != user.userName">
+            <ng-container *ngIf="timeDiff(u.lastRequest) < 300">
+              <tr class="">
+                <td scope="row">{{ u.userName }}</td>
+                <td>{{ u.lastRequest | date : "short" }}</td>
+                <td>
+                  <app-sendinvite
+                  [currentUser]="user"
+                  [invitedUserName]="u.userName"
+                  ></app-sendinvite>
+                </td>
+              </tr>
+            </ng-container>
           </ng-container>
         </ng-container>
       </ng-container>
     </tbody>
   </table>
+</div>
+
 </div>

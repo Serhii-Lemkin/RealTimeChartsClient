@@ -5,14 +5,18 @@ import { UserModel } from 'src/_interfaces/usermodel';
 
 import { Output, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export default class InviteService {
   public data!: UserModel;
   public inviteReceived = false;
-  @Output() autodismiss = new EventEmitter<boolean>();
+  public accepted = false;
   private hubConnection!: signalR.HubConnection;
+
+  constructor(private http: HttpClient){}
+
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${environment.apiURL}/invitehub`, {
@@ -27,14 +31,27 @@ export default class InviteService {
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 
-  public onAutodismiss = () => {
-    this.autodismiss.emit(true);
-  };
-
   public addTransferChartDataListener = (username: string) => {
     this.hubConnection.on(username, (data) => {
+      this.accepted = false
       this.data = data;
       this.inviteReceived = true;
+      setTimeout(() => {
+        if (!this.accepted) {
+          this.inviteReceived = false;
+          let json = JSON.stringify('dismiss');
+          const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+          });
+          this.http
+            .post(`${environment.apiURL}/api/invite/react/` + this.data, json, {
+              headers: headers,
+            })
+            .subscribe((data) => {
+              console.log(data);
+            });
+        }
+      }, 30000);
     });
   };
 }

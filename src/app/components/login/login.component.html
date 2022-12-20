@@ -1,5 +1,5 @@
-<div class="mb-3">
-      <h1>Log into your account</h1>
+<div class="mb-3 login">
+  <h1>Log into your account</h1>
   <br />
   <label for="" class="form-label">UserName</label>
   <input [(ngModel)]="loginData.userName" type="text" class="form-control" />
@@ -13,8 +13,8 @@
     <button type="Create" class="btn btn-primary" (click)="login()">
       Login
     </button>
-    <ng-container *ngIf="reqSuccess">
-        <small>User not found or wrong password</small>
+    <ng-container *ngIf="!reqSuccess">
+      <small style="color: red">User not found or wrong password</small>
     </ng-container>
   </div>
   <h6>

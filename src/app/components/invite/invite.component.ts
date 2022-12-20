@@ -31,6 +31,7 @@ export class InviteComponent {
   }
 
   accept = (code: string) => {
+    this.getInvite.accepted = true;
     this.getInvite.inviteReceived = false;
     let json = JSON.stringify("accept");
     console.log(json);
@@ -67,7 +68,7 @@ export class InviteComponent {
       )
       .subscribe((data) => {
         this.inviteCode = data as UserModel;
-        this.router.navigate(['home/']);
+        this.router.navigate(['/']);
       });
   };
 

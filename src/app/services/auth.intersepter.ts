@@ -17,7 +17,7 @@ export default class AuthInterseptor implements HttpInterceptor {
 
     if (token) {
       req = req.clone({
-        setHeaders: { Authorisation: `Bearer ${token}` },
+        setHeaders: { Authorization: `Bearer ${token}` },
       });
     }
 

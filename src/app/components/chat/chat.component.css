@@ -2,6 +2,12 @@ div.page {
 height: 100%
 }
 
+.chatarea {
+  border: 2px solid rgb(227, 227, 227);
+    padding: 30px;
+    background-image: url('https://www.patternpictures.com/wp-content/uploads/Kristal-subtle-glass-white-background-pattern-patternpictures-0220-1500x1000.png');
+}
+
 div.scroll {
   
   display: flex;
@@ -19,32 +25,44 @@ div.scroll {
   margin-left: 20px;
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #a8ddfd;
+  background-color: #162d3f;
   width: 50%;
   height: auto;
   text-align: left;
   font: 400 0.9em "Open Sans", sans-serif;
-  border: 1px solid #97c6e3;
+  border: 1px solid #ffffff;
   border-radius: 10px;
   overflow-wrap: break-word;
+  
 }
+
+.message-blue p{
+  color: white;
+}
+
+
 
 .message-orange {
   position: relative;
   margin-bottom: 10px;
   margin-left: 50%;
   padding: 10px;
-  background-color: #f8e896;
+  background-color: rgb(108, 1, 190);
   width: 50%;
   height: auto;
   text-align: left;
   font: 400 0.9em "Open Sans", sans-serif;
-  border: 1px solid #dfd087;
+  border: 1px solid #550049;
   border-radius: 10px;
   overflow-wrap: break-word;
 }
 
-.message-timestamp-right {
+.message-orange p{
+  color: white;
+}
+
+.message-timestamp-right {  
+  color: rgb(167, 167, 167);
   position: absolute;
   font-size: 0.85em;
   font-weight: 300;
@@ -53,6 +71,7 @@ div.scroll {
 }
 
 .message-timestamp-left {
+  color: rgb(167, 167, 167);
   position: absolute;
   font-size: 0.85em;
   font-weight: 300;

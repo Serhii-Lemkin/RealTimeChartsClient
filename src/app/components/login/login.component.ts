@@ -27,10 +27,11 @@ export class LoginComponent {
           this.reqSuccess = false;
           return;
         } else {
+          this.reqSuccess = true;
           let tmp = data as ReturnLoginModel;
           console.log(data);
           sessionStorage.setItem('currentUser', JSON.stringify(tmp.user));
-          sessionStorage.setItem('jwt', JSON.stringify(tmp.token));
+          sessionStorage.setItem('jwt', tmp.token);
           this.router.navigate(['/']);
         }
       });

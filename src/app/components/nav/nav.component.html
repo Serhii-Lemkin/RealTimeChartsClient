@@ -1,5 +1,8 @@
-<button (click)="logout()" type="button" class="btn btn-danger">LogOut</button>
-<button (click)="login()" type="button" class="btn btn-primary">
-  LogIn
-</button>
-
+<ng-container *ngIf="jwtExists">
+  <button (click)="logout()" type="button" class="btn btn-danger">
+    LogOut
+  </button>
+</ng-container>
+<ng-container *ngIf="!jwtExists">
+  <button (click)="login()" type="button" class="btn btn-primary">LogIn</button>
+</ng-container>

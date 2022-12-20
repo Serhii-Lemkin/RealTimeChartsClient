@@ -22,14 +22,17 @@ export default class HomeComponent implements OnInit {
   ) {
     let tmpUser = sessionStorage.getItem('currentUser');
     if (!tmpUser) this.router.navigate(['/login']);
-    if (tmpUser) this.user = JSON.parse(tmpUser);
+    if (tmpUser) {
+      this.user = JSON.parse(tmpUser);
+    }
   }
   private startHttpRequest = () => {
     this.http.get(`${environment.apiURL}/api/user`).subscribe((data) => {
       if (data === 'UserName Taken') {
         console.log(data);
       } else {
-        this.getActiveService.data = data as UserModel[];
+        let tmp = data as UserModel[];
+        this.getActiveService.data = tmp;
       }
     });
   };
@@ -41,5 +44,10 @@ export default class HomeComponent implements OnInit {
     this.getActiveService.startConnection();
     this.getActiveService.addTransferChartDataListener();
     this.startHttpRequest();
+    this.user.lastRequest = new Date();
+    console.log('blabla');
+  }
+  timeDiff(lastRequest: Date) {
+    return (new Date().getTime() - new Date(lastRequest).getTime()) / 1000;
   }
 }

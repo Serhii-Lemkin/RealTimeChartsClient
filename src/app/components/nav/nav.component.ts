@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/_interfaces/usermodel';
@@ -9,15 +9,26 @@ import { environment } from 'src/environments/environment';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
 })
-export class NavComponent {
-  constructor(private router: Router, private http: HttpClient) {}
+export class NavComponent implements OnInit{
+  constructor(private router: Router, private http: HttpClient) {
+    
+  }
+  ngOnInit(): void {
+    let jwt = sessionStorage.getItem('jwt');
+    if (jwt) {
+      this.jwtExists = true;
+    } else {
+      this.jwtExists = false;
+    }
+  }
 
+  jwtExists!: boolean;
   user!: UserModel;
 
   logout = () => {
     let tmpUser = sessionStorage.getItem('currentUser');
     if (tmpUser == null) {
-      this.router.navigate(['/register']);
+      this.router.navigate(['/login']);
       return;
     }
     if (tmpUser != null) this.user = JSON.parse(tmpUser);
@@ -31,12 +42,11 @@ export class NavComponent {
       })
       .subscribe((data) => {
         sessionStorage.clear();
-        this.router.navigate(['/register']);
+        this.router.navigate(['/login']);
       });
   };
 
   login() {
     this.router.navigate(['/login']);
   }
- 
 }

@@ -26,6 +26,7 @@ export default class ActiveUsers {
   public addTransferChartDataListener = () => {
     this.hubConnection.on('activeUsers', (data) => {
       this.data = data;
+          
     });
   };
 }

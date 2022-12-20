@@ -31,6 +31,10 @@ export default class GameService {
       .catch((err) => console.log('Error while starting connection: ' + err));
   };
 
+  connectionClose(){
+    this.hubConnection.stop()
+  }
+
   public addTransferChartDataListener = (
     code: string,
     currentUserCode: string

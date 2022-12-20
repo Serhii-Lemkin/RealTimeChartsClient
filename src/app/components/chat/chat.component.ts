@@ -40,6 +40,7 @@ export class ChatComponent implements OnInit {
     );
     let tmpMessages = sessionStorage.getItem(this.code);
     if (tmpMessages) this.messanger.messages = JSON.parse(tmpMessages);
+    
   }
 
   hideGame = () => {
@@ -61,9 +62,16 @@ export class ChatComponent implements OnInit {
   confirmLeave = () => {
     sessionStorage.removeItem(this.code);
     sessionStorage.removeItem('gameHistory');
-    this.leaveChatClicked = false;
-    this.router.navigate(['/']);
     this.messanger.stopConnection();
+    this.leaveChatClicked = false;
+
+    this.message.code = this.code;
+    this.message.date = new Date();
+    this.message.messageText = `${this.currentUser.userName} left the chat`
+    this.http
+      .post(`${environment.apiURL}/api/message`, this.message)
+      .subscribe((data) => {});
+    this.router.navigate(['/']);
 
     // http req to leave chat, the other chat member gets notification and also may leave chat
   };
