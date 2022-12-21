@@ -7,12 +7,12 @@
   </div>
   <div [ngClass]="messanger.showGame ? 'col-md-6' : ''">
     <div class="container">
-      <div class="scroll">
+      <div class="scroll" >
         <ng-container *ngFor="let m of messanger.messages">
           <div
             [ngClass]="
               m.from !== currentUser.userName
-                ? 'message-blue'
+                ? 'message-blue' 
                 : 'message-orange'
             "
           >
